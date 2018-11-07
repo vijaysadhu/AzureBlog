@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Amazon Lex for JavaScript - Sample Application (BookTrip)</title>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.41.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+<script>
+$(document).ready(function(){
+$("#post-btn").click(function(){
+$.ajax({
+url:"https://brvofaq.azurewebsites.net/qnamaker/knowledgebases/682dab30-c925-4053-a7f6-7a92469b04e8/generateAnswer",
+type:"POST",
+data:'{"question": "'+$("#question").val()+'"}',//${"req-form"}
+dataType:"json",
+contentType:"application/json",
+headers:{"Authorization": "EndpointKey 1626631b-7b2e-406d-9842-4e4166501c0e"},
+success:function(msg,status,jqXHR){
+$("#answer").html(msg.answers[0].answer);
+}
+});
+});
+});
+</script>
+
+	<style language="text/css">
+		input#wisdom {
+			padding: 4px;
+			font-size: 1em;
+			width: 400px
+		}
+
+		input::placeholder {
+			color: #ccc;
+			font-style: italic;
+		}
+
+		p.userRequest {
+			margin: 4px;
+			padding: 4px 10px 4px 10px;
+			border-radius: 4px;
+			min-width: 50%;
+			max-width: 85%;
+			float: left;
+			background-color: #7d7;
+		}
+
+		p.lexResponse {
+			margin: 4px;
+			padding: 4px 10px 4px 10px;
+			border-radius: 4px;
+			text-align: right;
+			min-width: 50%;
+			max-width: 85%;
+			float: right;
+			background-color: #bbf;
+			font-style: italic;
+		}
+
+		p.lexError {
+			margin: 4px;
+			padding: 4px 10px 4px 10px;
+			border-radius: 4px;
+			text-align: right;
+			min-width: 50%;
+			max-width: 85%;
+			float: right;
+			background-color: #f77;
+		}
+		
+		
+		.button2 {width: 50%;}
+		
+		
+	</style>
+</head>
+
+<body>
+<form id="searchForm">
+ <td>
+          <img src="springsource.png">
+        </td>  
+<h3>  Ask the BRAVO FAQ Chatbot</h3>
+<input type="text" class="button2" id="question" name="question">
+<button type="button"  id="post-btn">Ask the bot</button>
+<br>
+<h3>Answer</h3>
+<div id="answer"></div>
+<br>
+</form>
+
+
+  
+	
+</body>
+
+</html>
